@@ -7,7 +7,7 @@
  for(int i=0;i<=number.size()-1;i++)
  {
  %>
- <%= ((launch.BD_User) number.get(i)).name %>
+ <%= ((launch.BD_User) number.get(i))%>
  <%} %>
 
 </body>
