@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Список блюд</title>
+<title>Список тренировок </title>
 <meta http-equiv="Content-Type" content = "text/html;charset=utf-8"/>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -11,9 +11,9 @@
     <li><a href="trenirovki.html">Список тренировок</a></li>
     <li><a href="dnevnik.html">Личный кабинет</a></li>
 </ul>
-<input type="text" name="searchfood"  size="35" id="SearchFood" placeholder="Название блюда"></input>
-<input type="button" name="searchfoodbutton" id="SearchFoodButton" value="Поиск"></input>
-<input type="button" name="addfoodbutton" id="AddFoodButton" value="Добавить"></input><br>
+<input type="text" name="searchtrenirovki"  size="35" id="SearchTrenirovki" placeholder="Название тренировки"></input>
+<input type="button" name="searchtrenirovkibutton" id="SearchTrenirovkiButton" value="Поиск"></input>
+<input type="button" name="addtrenirovkibutton" id="AddTrenirovkiButton" value="Добавить"></input><br>
 
 </body>
 </html>
