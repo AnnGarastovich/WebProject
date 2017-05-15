@@ -1,5 +1,7 @@
 package servlet;
 
+import launch.BD_ListOfFood;
+import launch.BD_ListOfTrainings;
 import launch.BD_User;
 
 import java.io.IOException;
@@ -15,23 +17,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(
-        name = "MyServlet",
-        urlPatterns = {"/Profil"}
-    )
-public class HelloServlet extends HttpServlet {
-
+        name = "MainServlet",
+        urlPatterns = {"/Vhod"}
+)
+public class MainServlet  extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        BD_User obj=new BD_User();
-        obj.login=request.getParameter("login");
-        obj.password=request.getParameter("password");
-        System.out.println(obj.login);
-        System.out.println(obj.password);
 
-        request.getRequestDispatcher("/Profil.jsp").forward(request, response);
+        request.getRequestDispatcher("/Vhod.jsp").forward(request, response);
     }
 
-    
 }

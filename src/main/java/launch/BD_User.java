@@ -18,7 +18,12 @@ public class BD_User {
     public int weight;
     public int height;
     public int age;
-
+    public BD_User(){}
+    public BD_User(String login, String password)
+    {
+        this.login=login;
+        this.password=password;
+    }
     public void sedIdUser(int id_user) {
         this.id_user = id_user;
     }
@@ -158,5 +163,29 @@ public class BD_User {
                 ", height=" + height +
                 ", age=" + age +
                 '}';
+    }
+    public int Add_DanEmp(int id_user, String name, String login, String password, int weight, int height,int age) {
+
+        Connection c = null;
+        Statement stmt = null;
+        boolean cout = false;
+int Result=0;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:ZOJ.db");
+            System.out.println("Opened database successfully");
+            stmt = c.createStatement();
+            String e = "INSERT INTO Employes VALUES(" + id_user + "," + "\'" + name + "\'" + "," + "\'" + login + "\'" + "," + "\'" + password + "\'" + "," + weight + ","+height+","+ age+')';
+            int i = stmt.executeUpdate(e);
+            if(i == 1) {
+                Result=1;
+                return Result;
+            }
+        } catch (Exception var12) {
+            System.err.println(var12.getClass().getName() + ": " + var12.getMessage());
+            System.exit(0);
+        }
+
+        throw new IllegalStateException("Такого быть не должно");
     }
 }
