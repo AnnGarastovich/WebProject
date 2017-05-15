@@ -1,10 +1,12 @@
 package servlet;
 
+import launch.BD_ListOfFood;
 import launch.BD_User;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.servlet.ServletException;
@@ -29,8 +31,18 @@ public class HelloServlet extends HttpServlet {
         obj.password=request.getParameter("password");
         System.out.println(obj.login);
         System.out.println(obj.password);
-
-        request.getRequestDispatcher("/Profil.jsp").forward(request, response);
+        BD_User g=new BD_User();
+        int y=0;
+        try {
+            y=g.AVT(obj.login, obj.password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(y==0)
+        {
+               request.getRequestDispatcher("/Vhod.jsp").forward(request, response);
+        }
+        else request.getRequestDispatcher("/Profil.jsp").forward(request, response);
     }
 
     

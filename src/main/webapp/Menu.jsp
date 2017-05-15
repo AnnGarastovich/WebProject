@@ -6,10 +6,10 @@
 </head>
 <body>
 <ul>
-    <li><a href="Profil.jsp">Main</a></li>
-    <li><a href="Menu.jsp">List of food</a>
-    <li><a href="Trenirovki.jsp">List of trainings</a></li>
-    <li><a href="Dnevnik.jsp">Profil</a></li>
+    <li><a href="http://localhost:8080/Profil.jsp">Main</a></li>
+    <li><a href="http://localhost:8080/Menu.jsp">List of food</a>
+    <li><a href="http://localhost:8080/Trenirovki.jsp">List of trainings</a></li>
+    <li><a href="http://localhost:8080/Dnevnik.jsp">Profil</a></li>
 </ul>
 <input type="text" name="searchfood"  size="35" id="SearchFood" placeholder="Name of the dish"></input>
 <input type="button" name="searchfoodbutton" id="SearchFoodButton" value="Search"></input>

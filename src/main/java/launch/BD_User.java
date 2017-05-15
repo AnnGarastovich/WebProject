@@ -1,9 +1,6 @@
 package launch;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,13 +58,13 @@ public class BD_User {
         Statement stmt = null;
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ZOJ.db");
+            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
             c.setAutoCommit(false);
             System.out.println("Opened database successfully");
 
             stmt = c.createStatement();
             String sql = "INSERT INTO User " +
-                    "VALUES ( 1,'Анна','anngarastovich', '2774357a', 170, 80,20);";
+                    "VALUES ( 'Анна','anngarastovich', '2774357a', 170, 80,20);";
             stmt.executeUpdate(sql);
 
             stmt.close();
@@ -80,7 +77,6 @@ public class BD_User {
         System.out.println("Records created successfully");
     }
 
-    public static ResultSet resSet;
 
     public List<BD_User> Look_User() {
         Connection c = null;
@@ -88,7 +84,7 @@ public class BD_User {
         Statement stmt = null;
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ZOJ.db");
+            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
             c.setAutoCommit(false);
             System.out.println("Opened database successfully");
             stmt = c.createStatement();
@@ -132,11 +128,11 @@ public class BD_User {
 
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ZOJ.db");
+            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
             System.out.println("Opened database successfully");
             stmt = c.createStatement();
             String sql = "CREATE TABLE User " +
-                    "(Id_user INT  PRIMARY KEY  NOT NULL," +
+                    "(Id_user INT  AUTO_INCREMENT PRIMARY KEY  NOT NULL," +
                     " Name        TEXT    NOT NULL," +
                     "Login TEXT NOT NULL, " +
                     "Password   TEXT NOT NULL," +
@@ -164,7 +160,7 @@ public class BD_User {
                 ", age=" + age +
                 '}';
     }
-    public int Add_DanEmp(int id_user, String name, String login, String password, int weight, int height,int age) {
+    public int Add_User( String name, String login, String password, int weight, int height,int age) {
 
         Connection c = null;
         Statement stmt = null;
@@ -172,10 +168,10 @@ public class BD_User {
 int Result=0;
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ZOJ.db");
+            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
             System.out.println("Opened database successfully");
             stmt = c.createStatement();
-            String e = "INSERT INTO Employes VALUES(" + id_user + "," + "\'" + name + "\'" + "," + "\'" + login + "\'" + "," + "\'" + password + "\'" + "," + weight + ","+height+","+ age+')';
+            String e = "INSERT INTO User (Name, Login, Password, Height, Weight, Age)  VALUES(" + "\'" + name + "\'" + "," + "\'" + login + "\'" + "," + "\'" + password + "\'" + "," +height + ","+weight+","+ age+')';
             int i = stmt.executeUpdate(e);
             if(i == 1) {
                 Result=1;
@@ -187,5 +183,47 @@ int Result=0;
         }
 
         throw new IllegalStateException("Такого быть не должно");
+    }
+    public static ResultSet resSet;
+    public int AVT(String User_login, String User_password) throws SQLException {
+        int result=0;
+        Connection c = null;
+        Statement stmt = null;
+        int cout=0;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
+            System.out.println("Opened database successfully");
+            stmt = c.createStatement();
+            resSet =stmt.executeQuery("SELECT Login, Password  FROM User ");
+            while(resSet.next()) {
+               login = resSet.getString("Login");
+                password = resSet.getString("Password");
+                System.out.println(User_login);
+                System.out.println(User_password);
+                if(User_login.equals(login))
+                {
+                    System.out.println("AAAAAA");
+                    if(User_password.equals(password))
+                    {
+
+
+                       result=50;
+                        cout++;
+                        return result;
+
+                    }
+                }}
+            if (cout==0)
+            {
+                return result;}
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+        finally{stmt.close();}
+        throw new IllegalStateException("Такого быть не должно");
+
     }
 }
