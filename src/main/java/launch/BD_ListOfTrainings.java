@@ -4,7 +4,10 @@ import com.sun.xml.internal.bind.v2.model.core.ID;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ann on 14.05.2017.
@@ -14,6 +17,21 @@ public class BD_ListOfTrainings {
     public String Name;
     public int AmountOfCaloriesBurnedIn10min;
     public BD_ListOfTrainings(){}
+    public void setId_training(int Id_training)
+    {
+        this.Id_training=Id_training;
+    }
+    public void setName(String Name)
+    {
+        this.Name=Name;
+    }
+    public void setAmountOfCaloriesBurnedIn10min(int AmountOfCaloriesBurnedIn10min)
+    {
+        this.AmountOfCaloriesBurnedIn10min=AmountOfCaloriesBurnedIn10min;
+    }
+    public int getId_trainig(){return Id_training;}
+    public String getName(String name){return Name;}
+    public int getAmountOfCaloriesBurnedIn10min(){return AmountOfCaloriesBurnedIn10min;}
     BD_ListOfTrainings(int Id_training, String Name, int AmountOfCaloriesBurned10min)
     {
         this.Id_training= Id_training;
@@ -26,7 +44,7 @@ public class BD_ListOfTrainings {
 
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ZOJ.db");
+            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
             System.out.println("Opened database successfully");
             stmt = c.createStatement();
             String sql = "CREATE TABLE ListOfTrainings" +
@@ -43,5 +61,104 @@ public class BD_ListOfTrainings {
         }
         System.out.println("Table created successfully");
     }
+    public void InsertDanListOfTraining() {
+        Connection c = null;
+        Statement stmt = null;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
+            c.setAutoCommit(false);
+            System.out.println("Opened database successfully");
 
+            stmt = c.createStatement();
+            String sql = "INSERT INTO ListOfTrainings " +
+                    "VALUES ( 1,'Joggin',110);";
+            stmt.executeUpdate(sql);
+            stmt.close();
+            c.commit();
+            c.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        System.out.println("Records created successfully");
+    }
+
+    public static ResultSet resSet;
+    public List<BD_ListOfTrainings> Look_ListOfTrainings() {
+        Connection c = null;
+        int y = 0;
+        Statement stmt = null;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
+            c.setAutoCommit(false);
+            System.out.println("Opened database successfully");
+            stmt = c.createStatement();
+            int counter = 0;
+            List<BD_ListOfTrainings> traininglist= new ArrayList();
+            System.out.println("fff");
+            resSet = stmt.executeQuery("SELECT * FROM ListOfTrainings;");
+            System.out.println("FF");
+            while (resSet.next()) {
+                System.out.println("GG");
+                BD_ListOfTrainings adm = new BD_ListOfTrainings();
+                adm.setId_training(resSet.getInt("Id_training"));
+                adm.setName(resSet.getString("Name"));
+                adm.setAmountOfCaloriesBurnedIn10min(resSet.getInt("AmountOfCaloriesBurnedIn10min"));
+
+                traininglist.add(adm);
+            }
+            resSet.close();
+            stmt.close();
+            c.close();
+
+            return traininglist;
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        System.out.println("Operation done successfully");
+
+        throw new IllegalStateException("Такого быть не должно");
+
+
+    }
+    public List<BD_ListOfTrainings> Search_Training(String name) {
+        Connection c = null;
+        boolean y = false;
+        Statement stmt = null;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
+            c.setAutoCommit(false);
+            System.out.println("Opened database successfully");
+            stmt = c.createStatement();
+            boolean e = false;
+            ArrayList adminlist = new ArrayList();
+            System.out.println("fff");
+            resSet = stmt.executeQuery("SELECT * FROM ListOfTrainings WHERE Name =" + this.getName(name));
+            System.out.println("FF");
+
+            while(resSet.next()) {
+                System.out.println("GG");
+                BD_ListOfTrainings adm = new BD_ListOfTrainings();
+                adm.setId_training(resSet.getInt("Id_training"));
+                adm.setName(resSet.getString("Name"));
+                adm.setAmountOfCaloriesBurnedIn10min(resSet.getInt("AmountOfCaloriesBurnedIn10min"));
+                adminlist.add(adm);
+            }
+
+            resSet.close();
+            stmt.close();
+            c.close();
+            return adminlist;
+        } catch (Exception var8) {
+            System.err.println(var8.getClass().getName() + ": " + var8.getMessage());
+            System.exit(0);
+            System.out.println("Operation done successfully");
+            throw new IllegalStateException("Такого быть не должно");
+        }
+    }
 }

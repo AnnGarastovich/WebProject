@@ -14,6 +14,12 @@
 <input type="text" name="searchfood"  size="35" id="SearchFood" placeholder="Name of the dish"></input>
 <input type="button" name="searchfoodbutton" id="SearchFoodButton" value="Search"></input>
 <input type="button" name="addfoodbutton" id="AddFoodButton" value="Add"></input><br>
-
+<%
+ java.util.List number=(java.util.List)(request.getAttribute("Name"));
+ for(int i=0;i<=number.size()-1;i++)
+ {
+ %>
+ <%= ((launch.BD_ListOfFood) number.get(i).)%>
+ <%} %>
 </body>
 </html>
