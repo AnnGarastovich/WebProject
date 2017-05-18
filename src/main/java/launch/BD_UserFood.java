@@ -6,23 +6,24 @@ import java.sql.Statement;
 import java.util.Date;
 
 /**
- * Created by Ann on 14.05.2017.
+ * Created by Ann on 18.05.2017.
  */
-public class BD_UserTrainings {
-public  Date data;
-public int AmountOfMinute;
-public int NumbersOfCaloriesBurned;
-public int Id_training;
-public int Id_user;
-public BD_UserTrainings (){}
- public BD_UserTrainings( Date data, int AmountOfMinute, int NumbersOfCaloriesBurned, int Id_training, int Id_user)
-{this.data=data;
-this.AmountOfMinute=AmountOfMinute;
-this.NumbersOfCaloriesBurned=NumbersOfCaloriesBurned;
-this.Id_training=Id_training;
-this.Id_user=Id_user;
-}
-    public void CREATE_TABLE_UserTrainigs() {
+public class BD_UserFood {
+    public Date data;
+    public int QuantityEatenGr;
+    public int NumberOfCalories;
+    public int Id_food;
+    public int Id_user;
+    public BD_UserFood(){}
+    public BD_UserFood(Date data, int QuantityEatenGr, int NumberOfCalories, int Id_food,int  Id_user)
+    {
+        this.data=data;
+        this.QuantityEatenGr=QuantityEatenGr;
+        this.NumberOfCalories=NumberOfCalories;
+        this.Id_food=Id_food;
+        this.Id_user=Id_user;
+    }
+    public void CREATE_TABLE_UserFood() {
         Connection c = null;
         Statement stmt = null;
 
@@ -31,14 +32,15 @@ this.Id_user=Id_user;
             c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
             System.out.println("Opened database successfully");
             stmt = c.createStatement();
-            String sql = "CREATE TABLE UserTrainings " +
+            String sql = "CREATE TABLE UserFood " +
                     "(Date DATETIME PRIMARY KEY  NOT NULL," +
-                    "AmountOfMinutes INT NOT NULL,"+
-                    " NumbersOfCaloriesBurned   INT NOT NULL,"+
-                    "Id_training INT NOT NULL,"+
+                    "QuantityEatengr INT NOT NULL,"+
+                    " NumbersOfCalories   INT NOT NULL,"+
+                    "Id_food INT NOT NULL,"+
                     "Id_user INT NOT NULL,"+
-                    "CONSTRAINT FK_idtraining FOREIGN KEY (Id_training) REFERENCES ListOfTraining (Id_training) ON UPDATE CASCADE,"+
+                    "CONSTRAINT FK_idfood FOREIGN KEY (Id_food) REFERENCES ListOfFood (Id_food) ON UPDATE CASCADE,"+
                     "CONSTRAINT FK_iduser FOREIGN KEY (Id_user) REFERENCES User (Id_user) ON UPDATE CASCADE)";
+
 
             stmt.executeUpdate(sql);
             stmt.close();
@@ -49,4 +51,5 @@ this.Id_user=Id_user;
         }
         System.out.println("Table created successfully");
     }
+
 }

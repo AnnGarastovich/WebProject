@@ -10,8 +10,6 @@
 <input type="text" name="usertrenirovkaname" id="TrenirovkaName" size="35" placeholder="Name of training"></input><br>
 <input type="text" name="userkolkalburned" id="AmountOfKaloriesBurned" size="35" placeholder="Training time(minutes)"></input><br>
 <input type="submit" name="addusertrenirovkisubmit" id="AddTrenirovkiSubmit" value="Add"></input><br>
-
-
 </form>
 </body>
 </html>

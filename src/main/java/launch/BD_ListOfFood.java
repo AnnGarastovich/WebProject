@@ -45,7 +45,7 @@ public class BD_ListOfFood {
             System.out.println("Opened database successfully");
             stmt = c.createStatement();
             String sql = "CREATE TABLE ListOfFood" +
-                    "(Id_food  INT IDENTITY(1,1) PRIMARY KEY  NOT NULL," +
+                    "(Id_food  INTEGER  PRIMARY KEY AUTOINCREMENT," +
                     " Name        TEXT    NOT NULL," +
                     "AmountOfCaloriesIn100gr INT NOT NULL)";
 
@@ -157,5 +157,29 @@ public class BD_ListOfFood {
             System.out.println("Operation done successfully");
             throw new IllegalStateException("Такого быть не должно");
         }
+    }
+    public int Add_DanListOfFood( String Name,  int AmountOfCaloriesIn100gr) {
+      int result=0;
+        Connection c = null;
+        Statement stmt = null;
+        boolean cout = false;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
+            System.out.println("Opened database successfully");
+            stmt = c.createStatement();
+            String e = "INSERT INTO ListOfFood VALUES("  + "\'" + Name+ "\'" + "," + AmountOfCaloriesIn100gr + ')';
+            int i = stmt.executeUpdate(e);
+            if(i == 1) {
+                result=50;
+                return result;
+            }
+        } catch (Exception var12) {
+            System.err.println(var12.getClass().getName() + ": " + var12.getMessage());
+            System.exit(0);
+        }
+
+        throw new IllegalStateException("Такого быть не должно");
     }
 }

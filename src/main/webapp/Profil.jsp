@@ -6,10 +6,10 @@
 </head>
 <body>
 <ul>
-    <li><a href="http://localhost:8080/Profil.jsp">Main</a></li>
-    <li><a href="http://localhost:8080/Menu.jsp">List of food</a>
-    <li><a href="http://localhost:8080/Trenirovki.jsp">List of trainings</a></li>
-    <li><a href="http://localhost:8080/Dnevnik.jsp">Profil</a></li>
+    <li><a href="http://localhost:8080/Profil">Main</a></li>
+    <li><a href="http://localhost:8080/Menu">List of food</a>
+    <li><a href="http://localhost:8080/Trenirovki">List of trainings</a></li>
+    <li><a href="http://localhost:8080/Dnevnik">Profil</a></li>
 </ul>
 <div id="MainText">
 <h1 id="main">"We give you the tools - <br>you reach the goal"</h1>
