@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<form name="RegistrationForm" class="RegistrationForm" action="/Vhod" method="get">
+<form name="RegistrationForm" class="RegistrationForm" action="/RegistrationVhod" method="get">
 <h3 class="Zag">Please enter your details to register</h3>
 <input type="text" name="name" size="35" placeholder="Name"></input><br>
 <input type="text" name="reglogin" size="35" placeholder="Login"></input><br>
