@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -27,8 +28,8 @@ public class DnevnikServlet extends HttpServlet{
             throws ServletException, IOException {
 
         Date date=new Date();
-        request.setAttribute("Data", date.toString());
-
+        SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
+        request.setAttribute("Data", data.format(date));
 
         request.getRequestDispatcher("/Dnevnik.jsp").forward(request, response);
 

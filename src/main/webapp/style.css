@@ -9,7 +9,7 @@ ul {
 body
 {background:MediumSeaGreen;
 }
-a {
+.menu{
   text-decoration: none; /*??????? ????????????? ?????? ??????*/
   background:Orange; /*????????? ??? ? ?????? ????*/
   color:#fff; /*?????? ???? ??????*/
@@ -205,7 +205,52 @@ margin-top:5px;
 	border-radius: 5px;
 
 }
+#button
+{
+	border-radius: 5px;
+	width:150px;
+height:30px;
+background:Gainsboro;
+ text-decoration: none;
+ color:black;
+ position:relative;
+ left:10px;
+  font-family: arial;
+  text-align:center;
+    top:-30px;
 
+}
+#buttonTraining
+{
+	border-radius: 5px;
+	width:150px;
+height:30px;
+background:Gainsboro;
+ text-decoration: none;
+ color:black;
+ position:relative;
+ left:10px;
+  font-family: arial;
+  text-align:center;
+    top:-20px;
+
+}
+#buttonWater
+{
+	border-radius: 5px;
+	width:150px;
+height:30px;
+background:Gainsboro;
+ text-decoration: none;
+ color:black;
+ position:relative;
+ left:10px;
+  font-family: arial;
+  text-align:center;
+    top:-10px;
+
+}
+a{ text-decoration: none;}
 .Zag
 {
 	position:relative;

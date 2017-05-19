@@ -6,17 +6,22 @@
 </head>
 <body>
 <ul>
-    <li><a href="Profil.jsp">Main</a></li>
-    <li><a href="Menu.jsp">List of food</a>
-    <li><a href="Trenirovki.jsp">List of trainings</a></li>
-    <li><a href="Dnevnik.jsp">Profil</a></li>
+    <li><a href="http://localhost:8080/Profil" class="menu">Main</a></li>
+    <li><a href="http://localhost:8080/Menu" class="menu">List of food</a>
+    <li><a href="http://localhost:8080/Trenirovki" class="menu">List of trainings</a></li>
+    <li><a href="http://localhost:8080/Dnevnik" class="menu">Profil</a></li>
 </ul>
 <div id="Zapisi">
 <p> Date:<%= (String) (request.getAttribute("Data")) %></p>
 </div>
-<input type="button" name="addzapis" id="AddZapisFood" value="Add a dish"></input>
-<input type="button" name="addzapis" id="AddZapisTrenirovka" value="Add a trainig"></input>
-<input type="button" name="addwater" id="AddWater" value="Add water"></input>
-
+<div id="button">
+<a href="http://localhost:8080/AddUserFoodForm" >Add Food</a>
+</div>
+<div id="buttonTraining">
+<a href="http://localhost:8080/AddUserTrainingForm" >Add Training</a>
+</div>
+<div id="buttonWater">
+ <a href="http://localhost:8080/AddWater" >Add Water</a>
+ </div>
 </body>
 </html>

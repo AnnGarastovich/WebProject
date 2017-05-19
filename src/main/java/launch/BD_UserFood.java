@@ -23,6 +23,16 @@ public class BD_UserFood {
         this.Id_food=Id_food;
         this.Id_user=Id_user;
     }
+    public void setData(Date data){this.data=data;}
+    public void setQuantityEatenGr(int QuantityEatenGr){this.QuantityEatenGr=QuantityEatenGr;}
+    public void setNumberOfCalories(int NumberOfCalories){this.NumberOfCalories=NumberOfCalories;}
+    public void setId_food(int Id_food){this.Id_food=Id_food;}
+    public void setId_user(int Id_user){this.Id_user=Id_user;}
+    public Date getData(){return data;}
+    public int getQuantityEatenGr(){return QuantityEatenGr;}
+public int getNumberOfCalories(){return NumberOfCalories;}
+public int getId_food(){return Id_food;}
+public int getId_user(){return Id_user;}
     public void CREATE_TABLE_UserFood() {
         Connection c = null;
         Statement stmt = null;

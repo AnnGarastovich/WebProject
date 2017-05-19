@@ -172,7 +172,7 @@ public class BD_ListOfTrainings {
             c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
             System.out.println("Opened database successfully");
             stmt = c.createStatement();
-            String e = "INSERT INTO ListOfTrainings VALUES("  + "\'" + Name+ "\'" + "," + AmountOfCaloriesBurnedIn10min + ')';
+            String e = "INSERT INTO ListOfTrainings (Name, AmountOfCaloriesBurned10min) VALUES("  + "\'" + Name+ "\'" + "," + AmountOfCaloriesBurnedIn10min + ')';
             int i = stmt.executeUpdate(e);
             if(i == 1) {
                 result=50;

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(
         name = "MyServlet",
-        urlPatterns = {"/Profil"}
+        urlPatterns = {"/ProfilAVT"}
     )
 public class HelloServlet extends HttpServlet {
 
@@ -27,9 +27,9 @@ public class HelloServlet extends HttpServlet {
             throws ServletException, IOException {
 
         BD_User obj=new BD_User();
-        obj.login=request.getParameter("login");
-        obj.password=request.getParameter("password");
-        System.out.println(obj.login);
+       obj.login=request.getParameter("login");
+       obj.password=request.getParameter("password");
+
         System.out.println(obj.password);
         BD_User g=new BD_User();
         int y=0;
