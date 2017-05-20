@@ -6,7 +6,7 @@
 </head>
 <body
 <div class="Vhod">
-<form name="FormVhod" class="FF" action="/Profil" method="get">
+<form name="FormVhod" class="FF" action="/ProfilAVT" method="get">
 <p id="Hello">Hello</p>
 <input type="text" name="login" size="35" id="login" placeholder="Login"></input><br>
 <input type="text" name="password" size="35" id="password" placeholder="Password"></input></p><br>

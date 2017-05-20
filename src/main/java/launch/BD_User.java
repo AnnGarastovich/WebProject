@@ -114,15 +114,11 @@ public class BD_User {
     }
 
     public void InsertDan() {
-        Connection c = null;
         Statement stmt = null;
+        Connection c = null;
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
-            c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
-
-            stmt = c.createStatement();
+            c= BD_connection.Ret().Connection();
+            stmt=c.createStatement();
             String sql = "INSERT INTO User " +
                     "VALUES ( 'Анна','anngarastovich', '2774357a', 170, 80,20);";
             stmt.executeUpdate(sql);
@@ -139,16 +135,10 @@ public class BD_User {
 
 
     public List<BD_User> Look_User() {
-        Connection c = null;
-        int y = 0;
+
         Statement stmt = null;
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
-            c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
-            stmt = c.createStatement();
-            int counter = 0;
+
             List<BD_User> adminlist = new ArrayList();
             System.out.println("fff");
             resSet = stmt.executeQuery("SELECT * FROM User;");
@@ -167,7 +157,6 @@ public class BD_User {
             }
             resSet.close();
             stmt.close();
-            c.close();
 
             return adminlist;
 
@@ -183,14 +172,11 @@ public class BD_User {
     }
 
     public void CREATE_TABLE_User() {
-        Connection c = null;
         Statement stmt = null;
-
+        Connection c = null;
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
-            System.out.println("Opened database successfully");
-            stmt = c.createStatement();
+            c= BD_connection.Ret().Connection();
+            stmt=c.createStatement();
             String sql = "CREATE TABLE User " +
                     "(Id_user INT  AUTO_INCREMENT PRIMARY KEY  NOT NULL," +
                     " Name        TEXT    NOT NULL," +
@@ -222,15 +208,13 @@ public class BD_User {
     }
     public int Add_User( String name, String login, String password, int weight, int height,int age) {
 
-        Connection c = null;
         Statement stmt = null;
-        boolean cout = false;
-int Result=0;
+        Connection c = null;
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
-            System.out.println("Opened database successfully");
-            stmt = c.createStatement();
+            c= BD_connection.Ret().Connection();
+            stmt=c.createStatement();
+            int Result=0;
+
             String e = "INSERT INTO User (Name, Login, Password, Height, Weight, Age)  VALUES(" + "\'" + name + "\'" + "," + "\'" + login + "\'" + "," + "\'" + password + "\'" + "," +height + ","+weight+","+ age+')';
             int i = stmt.executeUpdate(e);
             if(i == 1) {
@@ -246,18 +230,16 @@ int Result=0;
     }
     public static ResultSet resSet;
     public int AVT(String User_login, String User_password) throws SQLException {
-        int result=0;
-        Connection c = null;
         Statement stmt = null;
-        int cout=0;
-
+        Connection c = null;
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
-            System.out.println("Opened database successfully");
-            stmt = c.createStatement();
-            resSet =stmt.executeQuery("SELECT Login, Password  FROM User ");
+            c= BD_connection.Ret().Connection();
+            stmt=c.createStatement();
+            int result=0;
+            int cout=0;
+            resSet =stmt.executeQuery("SELECT Id_user, Login, Password FROM User ");
             while(resSet.next()) {
+                id_user =resSet.getInt("Id_user");
                login = resSet.getString("Login");
                 password = resSet.getString("Password");
                 System.out.println(User_login);
@@ -269,7 +251,7 @@ int Result=0;
                     {
 
 
-                       result=50;
+                       result=id_user;
                         cout++;
                         return result;
 

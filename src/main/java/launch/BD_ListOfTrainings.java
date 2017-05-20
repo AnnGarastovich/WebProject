@@ -40,14 +40,11 @@ public class BD_ListOfTrainings {
         this.AmountOfCaloriesBurnedIn10min=AmountOfCaloriesBurned10min;
     }
     public void CREATE_TABLE_ListOfTrainigs() {
-        Connection c = null;
         Statement stmt = null;
-
+        Connection c = null;
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
-            System.out.println("Opened database successfully");
-            stmt = c.createStatement();
+            c= BD_connection.Ret().Connection();
+            stmt=c.createStatement();
             String sql = "CREATE TABLE ListOfTrainings" +
                     "(Id_trainig  INTEGER  PRIMARY KEY AUTOINCREMENT," +
                     " Name        TEXT    NOT NULL," +
@@ -63,15 +60,11 @@ public class BD_ListOfTrainings {
         System.out.println("Table created successfully");
     }
     public void InsertDanListOfTraining() {
-        Connection c = null;
         Statement stmt = null;
+        Connection c = null;
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
-            c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
-
-            stmt = c.createStatement();
+            c= BD_connection.Ret().Connection();
+            stmt=c.createStatement();
             String sql = "INSERT INTO ListOfTrainings " +
                     "VALUES ( 1,'Joggin',110);";
             stmt.executeUpdate(sql);
@@ -87,15 +80,11 @@ public class BD_ListOfTrainings {
 
     public static ResultSet resSet;
     public List<BD_ListOfTrainings> Look_ListOfTrainings() {
-        Connection c = null;
-        int y = 0;
         Statement stmt = null;
+        Connection c = null;
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
-            c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
-            stmt = c.createStatement();
+            c= BD_connection.Ret().Connection();
+            stmt=c.createStatement();
             int counter = 0;
             List<BD_ListOfTrainings> traininglist= new ArrayList();
             System.out.println("fff");
@@ -127,15 +116,11 @@ public class BD_ListOfTrainings {
 
     }
     public List<BD_ListOfTrainings> Search_Training(String name) {
-        Connection c = null;
-        boolean y = false;
         Statement stmt = null;
+        Connection c = null;
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
-            c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
-            stmt = c.createStatement();
+            c= BD_connection.Ret().Connection();
+            stmt=c.createStatement();
             boolean e = false;
             ArrayList adminlist = new ArrayList();
             System.out.println("fff");
@@ -163,16 +148,12 @@ public class BD_ListOfTrainings {
         }
     }
     public int Add_DanListOfTrainings( String Name,  int AmountOfCaloriesBurnedIn10min) {
-        int result=0;
-        Connection c = null;
         Statement stmt = null;
-        boolean cout = false;
-
+        Connection c = null;
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
-            System.out.println("Opened database successfully");
-            stmt = c.createStatement();
+            c= BD_connection.Ret().Connection();
+            stmt=c.createStatement();
+            int result=0;
             String e = "INSERT INTO ListOfTrainings (Name, AmountOfCaloriesBurned10min) VALUES("  + "\'" + Name+ "\'" + "," + AmountOfCaloriesBurnedIn10min + ')';
             int i = stmt.executeUpdate(e);
             if(i == 1) {

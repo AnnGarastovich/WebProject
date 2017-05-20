@@ -2,6 +2,7 @@ package launch;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Date;
 
@@ -60,6 +61,32 @@ public int getId_user(){return Id_user;}
             System.exit(0);
         }
         System.out.println("Table created successfully");
+    }
+    public int Add_DanWater(int QuantityEatenGr, int NumberOfCalories, int Id_user, int Id_food) {
+        int result = 0;
+        Connection c = null;
+        PreparedStatement stmt = null;
+        boolean cout = false;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
+            System.out.println("Opened database successfully");
+            stmt = c.prepareStatement("INSERT INTO UserFood VALUES (?, ?, ?, ?, ?)");
+            stmt.setDate(1, new java.sql.Date(System.currentTimeMillis()));
+            stmt.setInt(2, QuantityEatenGr);
+            stmt.setInt(3,NumberOfCalories);
+            stmt.setInt(4,Id_food);
+            stmt.setInt(5,Id_user);
+            stmt.execute();
+
+            return 50;
+        } catch (Exception var12) {
+            System.err.println(var12.getClass().getName() + ": " + var12.getMessage());
+            System.exit(0);
+        }
+
+        throw new IllegalStateException("Такого быть не должно");
     }
 
 }

@@ -31,6 +31,8 @@ public class DnevnikWaterAddServlet extends HttpServlet {
         BD_WaterBalance W=new BD_WaterBalance();
         W.AmountOfDrinks=Integer.parseInt(request.getParameter("kolwater"));
         BD_WaterBalance Obj=new BD_WaterBalance();
+        W.Id_user = (Integer) request.getSession().getAttribute("Id_user");
+Obj.Add_DanWater(W.AmountOfDrinks,W.Id_user);
 
 
 

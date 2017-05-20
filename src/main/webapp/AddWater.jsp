@@ -7,11 +7,8 @@
 <body>
 <form name="addwater" id="TrenirovkiAddForm" action="/DnevnikWaterAdd" method="get" >
 <h3 class="Zag">Please enter the amount of water you drank(gr)</h3>
-
 <input type="text" name="kolwater" id="AmountOfKaloriesBurned" size="35" placeholder="Amount of water"></input><br>
 <input type="submit" name="addwatersubmit" id="AddTrenirovkiSubmit" value="Add"></input><br>
-
-
 </form>
 </body>
 </html>

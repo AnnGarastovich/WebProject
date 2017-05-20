@@ -1,5 +1,7 @@
 package launch;
 
+import com.sun.org.apache.bcel.internal.generic.RET;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -33,18 +35,15 @@ public class BD_ListOfFood {
         this.AmountOfCaloriesIn100gr=AmountOfCaloriesIn100gr;
     }
     public int getId_Food(){return Id_Food;}
-    public String getNameforSearch(String name){return Name;}
+    public String getNameforSearch(String name){return name;}
     public String getName(){return Name;}
     public int getAmountOfCaloriesIn100gr(){return AmountOfCaloriesIn100gr;}
     public void CREATE_TABLE_ListOfFood() {
-        Connection c = null;
         Statement stmt = null;
-
+        Connection c = null;
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
-            System.out.println("Opened database successfully");
-            stmt = c.createStatement();
+            c= BD_connection.Ret().Connection();
+            stmt=c.createStatement();
             String sql = "CREATE TABLE ListOfFood" +
                     "(Id_food  INTEGER  PRIMARY KEY AUTOINCREMENT," +
                     " Name        TEXT    NOT NULL," +
@@ -60,15 +59,11 @@ public class BD_ListOfFood {
         System.out.println("Table created successfully");
     }
     public void InsertDanListOfFood() {
-        Connection c = null;
         Statement stmt = null;
+        Connection c = null;
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
-            c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
-
-            stmt = c.createStatement();
+            c= BD_connection.Ret().Connection();
+            stmt=c.createStatement();
             String sql = "INSERT INTO ListOfFood " +
                     "VALUES ( 1,'Milk Chokolate',539);";
             stmt.executeUpdate(sql);
@@ -84,15 +79,11 @@ public class BD_ListOfFood {
     }
     public static ResultSet resSet;
     public List<BD_ListOfFood> Look_ListOfFood() {
-        Connection c = null;
-        int y = 0;
         Statement stmt = null;
+        Connection c = null;
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
-            c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
-            stmt = c.createStatement();
+           c= BD_connection.Ret().Connection();
+            stmt=c.createStatement();
             int counter = 0;
             List<BD_ListOfFood> listfood = new ArrayList();
             System.out.println("fff");
@@ -124,19 +115,15 @@ public class BD_ListOfFood {
 
     }
     public List<BD_ListOfFood> Search_Food(String name) {
-        Connection c = null;
-        boolean y = false;
         Statement stmt = null;
+        Connection c = null;
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
-            c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
-            stmt = c.createStatement();
+            c= BD_connection.Ret().Connection();
+            stmt=c.createStatement();
             boolean e = false;
             ArrayList adminlist = new ArrayList();
             System.out.println("fff");
-            resSet = stmt.executeQuery("SELECT * FROM ListOfFood WHERE Name =" + this.getNameforSearch(name));
+            resSet = stmt.executeQuery("SELECT * FROM ListOfFood WHERE Name =" + "'"+this.getNameforSearch(name)+"'");
             System.out.println("FF");
 
             while(resSet.next()) {
@@ -150,7 +137,7 @@ public class BD_ListOfFood {
 
             resSet.close();
             stmt.close();
-            c.close();
+           c.close();
             return adminlist;
         } catch (Exception var8) {
             System.err.println(var8.getClass().getName() + ": " + var8.getMessage());
@@ -161,15 +148,12 @@ public class BD_ListOfFood {
     }
     public int Add_DanListOfFood( String Name,  int AmountOfCaloriesIn100gr) {
       int result=0;
-        Connection c = null;
-        Statement stmt = null;
-        boolean cout = false;
 
+        Statement stmt = null;
+        Connection c = null;
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
-            System.out.println("Opened database successfully");
-            stmt = c.createStatement();
+            c= BD_connection.Ret().Connection();
+            stmt=c.createStatement();
             String e = "INSERT INTO ListOfFood (Name, AmountOfCaloriesIn100gr) VALUES("  + "\'" + Name+ "\'" + "," + AmountOfCaloriesIn100gr + ')';
             int i = stmt.executeUpdate(e);
             if(i == 1) {

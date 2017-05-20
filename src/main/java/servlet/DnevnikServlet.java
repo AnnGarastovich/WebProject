@@ -3,6 +3,7 @@ package servlet;
 import launch.BD_ListOfFood;
 import launch.BD_ListOfTrainings;
 import launch.BD_User;
+import launch.BD_WaterBalance;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -30,6 +31,7 @@ public class DnevnikServlet extends HttpServlet{
         Date date=new Date();
         SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
         request.setAttribute("Data", data.format(date));
+
 
         request.getRequestDispatcher("/Dnevnik.jsp").forward(request, response);
 
