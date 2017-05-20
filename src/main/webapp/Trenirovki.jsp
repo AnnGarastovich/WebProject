@@ -16,6 +16,14 @@
 <div id="button">
 <a href="http://localhost:8080/AddTrenirovkiForm" >Add</a>
 </div>
+ <%
+ java.util.List number=(java.util.List)(request.getAttribute("Name"));
+ for(int i=0;i<=number.size()-1;i++)
+ {
+ %>
+ <%= ((launch.BD_ListOfTrainings) number.get(i)).getName()%>
+  <%= ((launch.BD_ListOfTrainings) number.get(i)).getAmountOfCaloriesBurnedIn10min()%>
 
+ <%} %>
 </body>
 </html>

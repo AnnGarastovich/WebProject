@@ -26,15 +26,11 @@ public class TrainingServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BD_ListOfTrainings Obj= new BD_ListOfTrainings();
-     //  Obj.Name=request.getParameter("trenirovkaname");
-     //  Obj.AmountOfCaloriesBurnedIn10min=Integer.parseInt(request.getParameter("kolkalburned"));
-        BD_ListOfTrainings Fun= new BD_ListOfTrainings();
-     //BD=  Fun.Add_DanListOfTrainings(Obj.Name, Obj.AmountOfCaloriesBurnedIn10min);
-       // List<BD_ListOfTrainings> h=new ArrayList();
-       // BD_ListOfTrainings list=new BD_ListOfTrainings();
-       // h=list.Look_ListOfTrainings();
-       // request.setAttribute("Name",h);
+
+       List<BD_ListOfTrainings> h=new ArrayList();
+       BD_ListOfTrainings list=new BD_ListOfTrainings();
+        h=list.Look_ListOfTrainings();
+        request.setAttribute("Name",h);
 
         if(/*D.Name.equals(Sr) || D.AmountOfCaloriesIn100gr==0*| BD==0*/ ch!=0)
         {

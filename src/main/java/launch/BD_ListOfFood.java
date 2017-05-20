@@ -33,7 +33,8 @@ public class BD_ListOfFood {
         this.AmountOfCaloriesIn100gr=AmountOfCaloriesIn100gr;
     }
     public int getId_Food(){return Id_Food;}
-    public String getName(String name){return Name;}
+    public String getNameforSearch(String name){return Name;}
+    public String getName(){return Name;}
     public int getAmountOfCaloriesIn100gr(){return AmountOfCaloriesIn100gr;}
     public void CREATE_TABLE_ListOfFood() {
         Connection c = null;
@@ -135,7 +136,7 @@ public class BD_ListOfFood {
             boolean e = false;
             ArrayList adminlist = new ArrayList();
             System.out.println("fff");
-            resSet = stmt.executeQuery("SELECT * FROM ListOfFood WHERE Name =" + this.getName(name));
+            resSet = stmt.executeQuery("SELECT * FROM ListOfFood WHERE Name =" + this.getNameforSearch(name));
             System.out.println("FF");
 
             while(resSet.next()) {

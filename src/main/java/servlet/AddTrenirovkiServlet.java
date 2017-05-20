@@ -2,7 +2,8 @@ package servlet;
 
 /**
  * Created by Ann on 19.05.2017.
- */import launch.BD_ListOfFood;
+ */
+import launch.BD_ListOfFood;
 import launch.BD_ListOfTrainings;
 
 import javax.servlet.ServletException;
@@ -28,7 +29,12 @@ public class AddTrenirovkiServlet extends HttpServlet{
         BD_ListOfTrainings L=new BD_ListOfTrainings();
         int result=0;
         result = L.Add_DanListOfTrainings(TR.Name, TR.AmountOfCaloriesBurnedIn10min);
+        List<BD_ListOfTrainings> h=new ArrayList();
+        BD_ListOfTrainings list=new BD_ListOfTrainings();
+        h=list.Look_ListOfTrainings();
+        request.setAttribute("Name",h);
         String st=new String();
+
         if(result==0 || TR.Name.equals(st) || TR.AmountOfCaloriesBurnedIn10min==0)
         {
             request.getRequestDispatcher("/AddTrenirovkiForm.jsp").forward(request, response);

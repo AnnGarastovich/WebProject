@@ -30,10 +30,10 @@ D.AmountOfCaloriesIn100gr=Integer.parseInt(request.getParameter("kolkal"));
         BD_ListOfFood list=new BD_ListOfFood();
         int result=0;
         result=list.Add_DanListOfFood(D.Name, D.AmountOfCaloriesIn100gr);
-      //  List<BD_ListOfFood> h=new ArrayList();
-       //   BD_ListOfFood list=new BD_ListOfFood();
-      //  h=list.Look_ListOfFood();
-      //  request.setAttribute("Name",h);
+       List<BD_ListOfFood> h=new ArrayList();
+        BD_ListOfFood listA=new BD_ListOfFood();
+      h=listA.Look_ListOfFood();
+       request.setAttribute("Name",h);
 String pr=new String();
 if(result==0 || D.Name.equals(pr) || D.AmountOfCaloriesIn100gr==0)
 {

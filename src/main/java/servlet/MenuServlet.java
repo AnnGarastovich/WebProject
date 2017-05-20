@@ -37,10 +37,10 @@ BD_ListOfFood D= new BD_ListOfFood();
        // System.out.println(D.AmountOfCaloriesIn100gr);
         String Sr=new String();
         int ch=0;
-       // List<BD_ListOfFood>  h=new ArrayList();
-      //  BD_ListOfFood list=new BD_ListOfFood();
-       // h=list.Look_ListOfFood();
-       // request.setAttribute("Name",h);
+        List<BD_ListOfFood>  h=new ArrayList();
+      BD_ListOfFood list=new BD_ListOfFood();
+       h=list.Look_ListOfFood();
+       request.setAttribute("Name",h);
 
         if(/*D.Name.equals(Sr) || D.AmountOfCaloriesIn100gr==0*/ ch!=0)
         {

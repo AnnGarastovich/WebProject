@@ -30,7 +30,8 @@ public class BD_ListOfTrainings {
         this.AmountOfCaloriesBurnedIn10min=AmountOfCaloriesBurnedIn10min;
     }
     public int getId_trainig(){return Id_training;}
-    public String getName(String name){return Name;}
+    public String getNameforSearch(String name){return Name;}
+    public String getName(){return Name;}
     public int getAmountOfCaloriesBurnedIn10min(){return AmountOfCaloriesBurnedIn10min;}
     BD_ListOfTrainings(int Id_training, String Name, int AmountOfCaloriesBurned10min)
     {
@@ -103,9 +104,9 @@ public class BD_ListOfTrainings {
             while (resSet.next()) {
                 System.out.println("GG");
                 BD_ListOfTrainings adm = new BD_ListOfTrainings();
-                adm.setId_training(resSet.getInt("Id_training"));
+                adm.setId_training(resSet.getInt("Id_trainig"));
                 adm.setName(resSet.getString("Name"));
-                adm.setAmountOfCaloriesBurnedIn10min(resSet.getInt("AmountOfCaloriesBurnedIn10min"));
+                adm.setAmountOfCaloriesBurnedIn10min(resSet.getInt("AmountOfCaloriesBurned10min"));
 
                 traininglist.add(adm);
             }
@@ -138,7 +139,7 @@ public class BD_ListOfTrainings {
             boolean e = false;
             ArrayList adminlist = new ArrayList();
             System.out.println("fff");
-            resSet = stmt.executeQuery("SELECT * FROM ListOfTrainings WHERE Name =" + this.getName(name));
+            resSet = stmt.executeQuery("SELECT * FROM ListOfTrainings WHERE Name =" + this.getNameforSearch(name));
             System.out.println("FF");
 
             while(resSet.next()) {
