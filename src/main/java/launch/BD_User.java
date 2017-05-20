@@ -15,12 +15,15 @@ public class BD_User {
     public int weight;
     public int height;
     public int age;
-    public BD_User(){}
-    public BD_User(String login, String password)
-    {
-        this.login=login;
-        this.password=password;
+
+    public BD_User() {
     }
+
+    public BD_User(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
+
     public void sedIdUser(int id_user) {
         this.id_user = id_user;
     }
@@ -117,8 +120,8 @@ public class BD_User {
         Statement stmt = null;
         Connection c = null;
         try {
-            c= BD_connection.Ret().Connection();
-            stmt=c.createStatement();
+            c = BD_connection.Ret().Connection();
+            stmt = c.createStatement();
             String sql = "INSERT INTO User " +
                     "VALUES ( 'Анна','anngarastovich', '2774357a', 170, 80,20);";
             stmt.executeUpdate(sql);
@@ -171,27 +174,27 @@ public class BD_User {
 
     }
 
-    public void CREATE_TABLE_User() {
+    public static void CREATE_TABLE_User() throws SQLException, ClassNotFoundException {
         Statement stmt = null;
         Connection c = null;
         try {
-            c= BD_connection.Ret().Connection();
-            stmt=c.createStatement();
+            c = BD_connection.Ret().Connection();
+            stmt = c.createStatement();
             String sql = "CREATE TABLE User " +
-                    "(Id_user INT  AUTO_INCREMENT PRIMARY KEY  NOT NULL," +
+                    "(Id_user INTEGER  PRIMARY KEY AUTOINCREMENT," +
                     " Name        TEXT    NOT NULL," +
                     "Login TEXT NOT NULL, " +
                     "Password   TEXT NOT NULL," +
                     "Height INT ," + " Weight INT," + "Age INT) ";
 
-            stmt.executeUpdate(sql);
+            stmt.execute(sql);
             stmt.close();
             c.close();
+            System.out.println("Table created successfully");
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        System.out.println("Table created successfully");
     }
 
     @Override
@@ -206,19 +209,20 @@ public class BD_User {
                 ", age=" + age +
                 '}';
     }
-    public int Add_User( String name, String login, String password, int weight, int height,int age) {
+
+    public int Add_User(String name, String login, String password, int weight, int height, int age) {
 
         Statement stmt = null;
         Connection c = null;
         try {
-            c= BD_connection.Ret().Connection();
-            stmt=c.createStatement();
-            int Result=0;
+            c = BD_connection.Ret().Connection();
+            stmt = c.createStatement();
+            int Result = 0;
 
-            String e = "INSERT INTO User (Name, Login, Password, Height, Weight, Age)  VALUES(" + "\'" + name + "\'" + "," + "\'" + login + "\'" + "," + "\'" + password + "\'" + "," +height + ","+weight+","+ age+')';
+            String e = "INSERT INTO User (Name, Login, Password, Height, Weight, Age)  VALUES(" + "\'" + name + "\'" + "," + "\'" + login + "\'" + "," + "\'" + password + "\'" + "," + height + "," + weight + "," + age + ')';
             int i = stmt.executeUpdate(e);
-            if(i == 1) {
-                Result=1;
+            if (i == 1) {
+                Result = 1;
                 return Result;
             }
         } catch (Exception var12) {
@@ -228,43 +232,45 @@ public class BD_User {
 
         throw new IllegalStateException("Такого быть не должно");
     }
+
     public static ResultSet resSet;
+
     public int AVT(String User_login, String User_password) throws SQLException {
         Statement stmt = null;
         Connection c = null;
         try {
-            c= BD_connection.Ret().Connection();
-            stmt=c.createStatement();
-            int result=0;
-            int cout=0;
-            resSet =stmt.executeQuery("SELECT Id_user, Login, Password FROM User ");
-            while(resSet.next()) {
-                id_user =resSet.getInt("Id_user");
-               login = resSet.getString("Login");
+            c = BD_connection.Ret().Connection();
+            stmt = c.createStatement();
+            int result = 0;
+            int cout = 0;
+            resSet = stmt.executeQuery("SELECT Id_user, Login, Password FROM User ");
+            while (resSet.next()) {
+                id_user = resSet.getInt("Id_user");
+                login = resSet.getString("Login");
                 password = resSet.getString("Password");
                 System.out.println(User_login);
                 System.out.println(User_password);
-                if(User_login.equals(login))
-                {
+                if (User_login.equals(login)) {
                     System.out.println("AAAAAA");
-                    if(User_password.equals(password))
-                    {
+                    if (User_password.equals(password)) {
 
 
-                       result=id_user;
+                        result = id_user;
                         cout++;
                         return result;
 
                     }
-                }}
-            if (cout==0)
-            {
-                return result;}
-        } catch ( Exception e ) {
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+                }
+            }
+            if (cout == 0) {
+                return result;
+            }
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
+        } finally {
+            stmt.close();
         }
-        finally{stmt.close();}
         throw new IllegalStateException("Такого быть не должно");
 
     }

@@ -14,7 +14,7 @@ public class BD_connection {
     public Connection Connection() throws ClassNotFoundException, SQLException {
             Class.forName("org.sqlite.JDBC");
             Connection c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
-            c.setAutoCommit(false);
+//            c.setAutoCommit(false);
             System.out.println("Opened database successfully");
             return c;
     }

@@ -26,7 +26,7 @@ public class MainServlet  extends HttpServlet{
 
 
 
-request.getRequestDispatcher("/Vhod.jsp").forward(request, response);
+request.getRequestDispatcher("Vhod.jsp").forward(request, response);
     }
 
 }

@@ -38,7 +38,7 @@ public class BD_ListOfFood {
     public String getNameforSearch(String name){return name;}
     public String getName(){return Name;}
     public int getAmountOfCaloriesIn100gr(){return AmountOfCaloriesIn100gr;}
-    public void CREATE_TABLE_ListOfFood() {
+    public static void CREATE_TABLE_ListOfFood() {
         Statement stmt = null;
         Connection c = null;
         try {

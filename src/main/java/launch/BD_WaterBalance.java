@@ -1,7 +1,5 @@
 package launch;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

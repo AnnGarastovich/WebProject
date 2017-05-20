@@ -1,10 +1,12 @@
 package launch;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import org.apache.catalina.LifecycleException;
 import org.apache.catalina.WebResourceRoot;
 import org.apache.catalina.WebResourceSet;
 import org.apache.catalina.core.StandardContext;
@@ -15,7 +17,24 @@ import org.apache.catalina.webresources.StandardRoot;
 import org.apache.tomcat.util.scan.Constants;
 import org.apache.tomcat.util.scan.StandardJarScanFilter;
 
+import javax.servlet.ServletException;
+
 public class Main {
+
+    public static void main(String[] args) throws Exception {
+
+        String mode = args[0];
+
+        if (mode.equals("createDb")) {
+            BD_User.CREATE_TABLE_User();
+        }
+        else if (mode.equals("startServer")) {
+            startServer();
+        }
+        else {
+            System.out.println("Vvedite mode");
+        }
+    }
 
     private static File getRootFolder() {
         try {
@@ -34,14 +53,13 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-
+    private static void startServer() throws IOException, ServletException, LifecycleException {
         File root = getRootFolder();
         System.setProperty("org.apache.catalina.startup.EXIT_ON_INIT_FAILURE", "true");
         Tomcat tomcat = new Tomcat();
         Path tempPath = Files.createTempDirectory("tomcat-base-dir");
         tomcat.setBaseDir(tempPath.toString());
-        
+
         //The port that we should run on can be set into an environment variable
         //Look for that variable and default to 8080 if it isn't there.
         String webPort = System.getenv("PORT");

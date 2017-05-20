@@ -1,9 +1,6 @@
 package launch;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
-
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -39,7 +36,7 @@ public class BD_ListOfTrainings {
         this.Name=Name;
         this.AmountOfCaloriesBurnedIn10min=AmountOfCaloriesBurned10min;
     }
-    public void CREATE_TABLE_ListOfTrainigs() {
+    public static void CREATE_TABLE_ListOfTrainigs() {
         Statement stmt = null;
         Connection c = null;
         try {
