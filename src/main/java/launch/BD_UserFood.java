@@ -1,10 +1,9 @@
 package launch;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Ann on 18.05.2017.
@@ -34,7 +33,8 @@ public class BD_UserFood {
 public int getNumberOfCalories(){return NumberOfCalories;}
 public int getId_food(){return Id_food;}
 public int getId_user(){return Id_user;}
-    public void CREATE_TABLE_UserFood() {
+public int getId_userforSearch(int Id_user){return Id_user;}
+    public static void CREATE_TABLE_UserFood() {
         Connection c = null;
         Statement stmt = null;
 
@@ -62,7 +62,7 @@ public int getId_user(){return Id_user;}
         }
         System.out.println("Table created successfully");
     }
-    public int Add_DanWater(int QuantityEatenGr, int NumberOfCalories, int Id_user, int Id_food) {
+    public int Add_DanUserFood(int QuantityEatenGr, int NumberOfCalories,  int Id_food,int Id_user) {
         int result = 0;
         Connection c = null;
         PreparedStatement stmt = null;
@@ -72,6 +72,7 @@ public int getId_user(){return Id_user;}
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:ZOJ3.db");
             System.out.println("Opened database successfully");
+
             stmt = c.prepareStatement("INSERT INTO UserFood VALUES (?, ?, ?, ?, ?)");
             stmt.setDate(1, new java.sql.Date(System.currentTimeMillis()));
             stmt.setInt(2, QuantityEatenGr);
@@ -87,6 +88,41 @@ public int getId_user(){return Id_user;}
         }
 
         throw new IllegalStateException("Такого быть не должно");
+    }
+    public static ResultSet resSet;
+    public List<BD_UserFood> Look_UserFood( int Id_user) {
+        Statement stmt = null;
+        Connection c = null;
+        try {
+            c= BD_connection.Ret().Connection();
+            stmt=c.createStatement();
+            boolean e = false;
+            ArrayList adminlist = new ArrayList();
+            System.out.println("fff");
+            resSet = stmt.executeQuery("SELECT * FROM UserFood WHERE  Id_user ="+this.getId_userforSearch(Id_user));
+            System.out.println("FF");
+
+            while(resSet.next()) {
+                System.out.println("GG");
+                BD_UserFood adm = new BD_UserFood();
+                adm.setData(resSet.getDate("Date"));
+                adm.setQuantityEatenGr(resSet.getInt("QuantityEatengr"));
+                adm.setNumberOfCalories(resSet.getInt("NumbersOfCalories"));
+                adm.setId_food(resSet.getInt("Id_food"));
+                adm.setId_user(resSet.getInt("Id_user"));
+                adminlist.add(adm);
+            }
+
+            resSet.close();
+            stmt.close();
+            c.close();
+            return adminlist;
+        } catch (Exception var8) {
+            System.err.println(var8.getClass().getName() + ": " + var8.getMessage());
+            System.exit(0);
+            System.out.println("Operation done successfully");
+            throw new IllegalStateException("Такого быть не должно");
+        }
     }
 
 }

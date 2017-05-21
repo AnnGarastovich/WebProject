@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<form name="addusertraining" id="TrenirovkiAddForm">
+<form name="addusertraining" id="TrenirovkiAddForm" action="/DnevnikAddUserTraining" method="get">
 <h3 class="Zag">Please enter details to add a training to the list.</h3>
 <input type="text" name="usertrenirovkaname" id="TrenirovkaName" size="35" placeholder="Name of training"></input><br>
 <input type="text" name="userkolkalburned" id="AmountOfKaloriesBurned" size="35" placeholder="Training time(minutes)"></input><br>

@@ -1,8 +1,5 @@
 package servlet;
 
-/**
- * Created by Ann on 19.05.2017.
- */
 import launch.BD_ListOfFood;
 import launch.BD_UserFood;
 import launch.BD_UserTrainings;
@@ -18,11 +15,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+/**
+ * Created by Ann on 21.05.2017.
+ */
 @WebServlet(
-        name = "AddWaterServlet",
-        urlPatterns = {"/DnevnikWaterAdd"}
+        name = "DnevnikAddUserFoodServlet",
+        urlPatterns = {"/DnevnikAddUserFood"}
 )
-public class DnevnikWaterAddServlet extends HttpServlet {
+public class DnevnikFoodAddServlet extends HttpServlet{
+
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -30,12 +33,22 @@ public class DnevnikWaterAddServlet extends HttpServlet {
         SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
         request.setAttribute("Data", data.format(date));
 
-        BD_WaterBalance W=new BD_WaterBalance();
-        W.AmountOfDrinks=Integer.parseInt(request.getParameter("kolwater"));
-        BD_WaterBalance Obj=new BD_WaterBalance();
+        BD_UserFood W=new BD_UserFood();
+        String name= new String();
+        name=request.getParameter("userfoodname");
+        BD_UserFood BD=new BD_UserFood();
+        List<BD_ListOfFood> h=new ArrayList();
+        BD_ListOfFood listA=new BD_ListOfFood();
+        h=listA.Search_Food(name);
+        int Id_food=0;
+        BD_ListOfFood L=new BD_ListOfFood();
+        L=h.get(0);
+        Id_food=L.Id_Food;
+        W.QuantityEatenGr=Integer.parseInt(request.getParameter("userkolkal"));
         W.Id_user = (Integer) request.getSession().getAttribute("Id_user");
-Obj.Add_DanWater(W.AmountOfDrinks,W.Id_user);
-
+        BD_ListOfFood lIST=new BD_ListOfFood();
+        int result=0;
+       result= BD.Add_DanUserFood(W.QuantityEatenGr,(L.AmountOfCaloriesIn100gr*W.QuantityEatenGr)/100, L.Id_Food, W.Id_user);
         List<BD_WaterBalance> hi=new ArrayList();
         BD_WaterBalance list=new BD_WaterBalance();
         int Id_user;
@@ -54,11 +67,5 @@ Obj.Add_DanWater(W.AmountOfDrinks,W.Id_user);
         Id_userT = (Integer) request.getSession().getAttribute("Id_user");
         t=listT.Look_UserTrainings(Id_userT);
         request.setAttribute("NameTraining",t);
-
-        request.getRequestDispatcher("/Dnevnik.jsp").forward(request, response);
-    }
-
-
-
-
+        request.getRequestDispatcher("/Dnevnik.jsp").forward(request, response);}
 }

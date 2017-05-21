@@ -1,12 +1,6 @@
 package servlet;
 
-/**
- * Created by Ann on 19.05.2017.
- */
-import launch.BD_ListOfFood;
-import launch.BD_UserFood;
-import launch.BD_UserTrainings;
-import launch.BD_WaterBalance;
+import launch.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,11 +12,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+/**
+ * Created by Ann on 21.05.2017.
+ */
 @WebServlet(
-        name = "AddWaterServlet",
-        urlPatterns = {"/DnevnikWaterAdd"}
+        name = "DnevnikAddUserTrenirovkiServlet",
+        urlPatterns = {"/DnevnikAddUserTraining"}
 )
-public class DnevnikWaterAddServlet extends HttpServlet {
+public class DnevnikTrenirovkiAddServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -30,12 +28,22 @@ public class DnevnikWaterAddServlet extends HttpServlet {
         SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
         request.setAttribute("Data", data.format(date));
 
-        BD_WaterBalance W=new BD_WaterBalance();
-        W.AmountOfDrinks=Integer.parseInt(request.getParameter("kolwater"));
-        BD_WaterBalance Obj=new BD_WaterBalance();
+        BD_UserTrainings W=new BD_UserTrainings();
+        String name= new String();
+        name=request.getParameter("usertrenirovkaname");
+        BD_UserTrainings BD=new BD_UserTrainings();
+        List<BD_ListOfTrainings> h=new ArrayList();
+        BD_ListOfTrainings listA=new BD_ListOfTrainings();
+        h=listA.Search_Training(name);
+        int Id_food=0;
+        BD_ListOfTrainings L=new BD_ListOfTrainings();
+        L=h.get(0);
+        Id_food=L.Id_training;
+        W.AmountOfMinute=Integer.parseInt(request.getParameter("userkolkalburned"));
         W.Id_user = (Integer) request.getSession().getAttribute("Id_user");
-Obj.Add_DanWater(W.AmountOfDrinks,W.Id_user);
-
+        BD_ListOfTrainings lIST=new BD_ListOfTrainings();
+        int result=0;
+        result= BD.Add_DanUserTrainings(W.AmountOfMinute,(L.AmountOfCaloriesBurnedIn10min*W.AmountOfMinute)/10, L.Id_training, W.Id_user);
         List<BD_WaterBalance> hi=new ArrayList();
         BD_WaterBalance list=new BD_WaterBalance();
         int Id_user;
@@ -54,11 +62,5 @@ Obj.Add_DanWater(W.AmountOfDrinks,W.Id_user);
         Id_userT = (Integer) request.getSession().getAttribute("Id_user");
         t=listT.Look_UserTrainings(Id_userT);
         request.setAttribute("NameTraining",t);
-
-        request.getRequestDispatcher("/Dnevnik.jsp").forward(request, response);
-    }
-
-
-
-
+        request.getRequestDispatcher("/Dnevnik.jsp").forward(request, response);}
 }

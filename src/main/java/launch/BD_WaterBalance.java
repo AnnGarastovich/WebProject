@@ -1,10 +1,9 @@
 package launch;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Ann on 08.05.2017.
@@ -37,6 +36,7 @@ public class BD_WaterBalance {
     public Date getData() {
         return data;
     }
+    public String getDataforSearch(String data){return data;}
 
     public int getAmountOfDrinks() {
         return AmountOfDrinks;
@@ -45,8 +45,9 @@ public class BD_WaterBalance {
     public int getId_user() {
         return Id_user;
     }
+    public int getId_userforSearch(int Id_user){return Id_user;}
 
-    public void CREATE_TABLE_WaterBalance() {
+    public static void CREATE_TABLE_WaterBalance() {
         Connection c = null;
         Statement stmt = null;
 
@@ -95,6 +96,39 @@ public class BD_WaterBalance {
         }
 
         throw new IllegalStateException("Такого быть не должно");
+    }
+    public static ResultSet resSet;
+    public List<BD_WaterBalance> Look_WaterBalance( int Id_user) {
+        Statement stmt = null;
+        Connection c = null;
+        try {
+            c= BD_connection.Ret().Connection();
+            stmt=c.createStatement();
+            boolean e = false;
+            ArrayList adminlist = new ArrayList();
+            System.out.println("fff");
+            resSet = stmt.executeQuery("SELECT * FROM WaterBalance WHERE  Id_user ="+this.getId_userforSearch(Id_user));
+            System.out.println("FF");
+
+            while(resSet.next()) {
+                System.out.println("GG");
+                BD_WaterBalance adm = new BD_WaterBalance();
+                adm.setData(resSet.getDate("Date"));
+                adm.setAmountOfDrinks(resSet.getInt("AmountOfDrinks"));
+                adm.setId_user(resSet.getInt("Id_user"));
+                adminlist.add(adm);
+            }
+
+            resSet.close();
+            stmt.close();
+            c.close();
+            return adminlist;
+        } catch (Exception var8) {
+            System.err.println(var8.getClass().getName() + ": " + var8.getMessage());
+            System.exit(0);
+            System.out.println("Operation done successfully");
+            throw new IllegalStateException("Такого быть не должно");
+        }
     }
 
 }

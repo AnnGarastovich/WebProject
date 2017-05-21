@@ -167,4 +167,38 @@ public class BD_ListOfFood {
 
         throw new IllegalStateException("Такого быть не должно");
     }
+
+ /*   public int Search_Id_food(String name) {
+        Statement stmt = null;
+        Connection c = null;
+        try {
+            c= BD_connection.Ret().Connection();
+            stmt=c.createStatement();
+            boolean e = false;
+            ArrayList adminlist = new ArrayList();
+            int Id_food=0;
+            System.out.println("fff");
+            resSet = stmt.executeQuery("SELECT * FROM ListOfFood WHERE Name =" + "'"+BD_ListOfFood.getNameforSearch(name)+ "'");
+            System.out.println("FF");
+
+            while(resSet.next()) {
+                System.out.println("GG");
+                BD_ListOfTrainings adm = new BD_ListOfTrainings();
+                Id_food=setId_food(resSet.getInt("Id_food"));
+                adm.setName(resSet.getString("Name"));
+                adm.setAmountOfCaloriesBurnedIn10min(resSet.getInt("AmountOfCaloriesBurned10min"));
+                adminlist.add(adm);
+            }
+
+            resSet.close();
+            stmt.close();
+            c.close();
+            return adminlist;
+        } catch (Exception var8) {
+            System.err.println(var8.getClass().getName() + ": " + var8.getMessage());
+            System.exit(0);
+            System.out.println("Operation done successfully");
+            throw new IllegalStateException("Такого быть не должно");
+        }
+    }*/
 }

@@ -27,6 +27,11 @@ public class Main {
 
         if (mode.equals("createDb")) {
             BD_User.CREATE_TABLE_User();
+            BD_ListOfFood.CREATE_TABLE_ListOfFood();
+            BD_ListOfTrainings.CREATE_TABLE_ListOfTrainigs();
+            BD_WaterBalance.CREATE_TABLE_WaterBalance();
+            BD_UserFood.CREATE_TABLE_UserFood();
+            BD_UserTrainings.CREATE_TABLE_UserTrainigs();
         }
         else if (mode.equals("startServer")) {
             startServer();
